@@ -6,13 +6,39 @@ class ProfileIcon extends StatelessWidget {
     super.key,
     required this.icon,
     this.state,
+    this.display = "",
+    this.showDisplay = false,
   });
 
   final Icon icon;
   final Status? state;
+  final String display;
+  final bool showDisplay;
 
   @override
   Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: SizedBox(
+        width: showDisplay ? null : 36,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          physics: const NeverScrollableScrollPhysics(),
+          child: Row(
+            children: [
+              _icon(),
+              Material(
+                color: Colors.transparent,
+                child: Text(display),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Stack _icon() {
     return Stack(children: [
       Container(
         margin: const EdgeInsets.symmetric(
@@ -22,7 +48,7 @@ class ProfileIcon extends StatelessWidget {
         width: 32,
         height: 32,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 224, 224, 224),
+          color: const Color.fromARGB(255, 224, 224, 224),
           borderRadius: BorderRadius.circular(16),
         ),
         child: icon,

@@ -21,22 +21,28 @@ class ConversationView extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: Row(
-                  children: Iterable.generate(conversation.channels.length).map(
-                    (index) {
-                      final channelOpt = conversation.channels[index];
-                      assert(channelOpt != null);
-                      final channel = channelOpt!;
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children:
+                        Iterable.generate(conversation.channels.length).map(
+                      (index) {
+                        final channelOpt = conversation.channels[index];
+                        assert(channelOpt != null);
+                        final channel = channelOpt!;
 
-                      return Hero(
-                        tag: channel,
-                        child: ProfileIcon(
-                          icon: const Icon(Icons.person),
-                          state: channel.status,
-                        ),
-                      );
-                    },
-                  ).toList(),
+                        return Hero(
+                          tag: channel,
+                          child: ProfileIcon(
+                            icon: const Icon(Icons.person),
+                            state: channel.status,
+                            display: channel.display,
+                            showDisplay: false,
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  ),
                 ),
               ),
               IconButton(

@@ -13,30 +13,24 @@ class ChannelsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Channels")),
       body: ListView.builder(
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final channel = channels[index];
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            final channel = channels[index];
 
-          if (channel == null) {
-            return null;
-          }
+            if (channel == null) {
+              return null;
+            }
 
-          return Row(
-            children: [
-              Hero(
-                tag: channel,
-                child: ProfileIcon(
-                  icon: const Icon(Icons.person),
-                  state: channel.status,
-                ),
+            return Hero(
+              tag: channel,
+              child: ProfileIcon(
+                icon: const Icon(Icons.person),
+                state: channel.status,
+                display: channel.display,
+                showDisplay: true,
               ),
-              Text(
-                channel.display,
-              )
-            ],
-          );
-        },
-      ),
+            );
+          }),
     );
   }
 }
